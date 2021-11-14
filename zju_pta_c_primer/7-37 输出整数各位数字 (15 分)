@@ -1,0 +1,75 @@
+本题要求编写程序，对输入的一个整数，从高位开始逐位分割并输出它的各位数字。
+
+输入格式：
+输入在一行中给出一个长整型范围内的非负整数。
+
+输出格式：
+从高位开始逐位输出该整数的各位数字，每个数字后面有一个空格。
+
+输入样例：
+123456
+输出样例：
+1 2 3 4 5 6 
+
+Code(gcc):
+
+// #include <stdio.h>                       //未考虑0结尾的数
+// int main()
+// {
+//     unsigned long a,a1,n;
+//     n=0;
+//     scanf("%ld",&a);
+//     a1=a;
+//     while(a1!=0)
+//     {
+//         n=a1%10+n*10;
+//         a1/=10;
+//     }
+// //    printf("n=%d\n",n);
+//     if(n==0)
+//     {
+//         printf("%d ",n%10);
+//     }
+//     while(n!=0)
+//     {
+//         printf("%d ",n%10);
+//         n/=10;
+//     }
+//     return 0;
+// }
+
+
+// #include <math.h>
+// int main(void)	//如果不需要从命令行中获取参数，请用int main(void)；否则请用int main(int argc, char *argv[])              //这个就满分
+// {
+// 	long n;
+// 	scanf("%ld",&n);
+	
+// 	long temp=n,mask=1;
+// 	while(temp/10!=0){	//n有几位？ 
+// 		temp/=10;
+// 		mask*=10;
+// 	}
+// //	printf("i=%d\n",i); 
+// 	while(mask!=0){		//从高到低取n各位上的数
+// 		printf("%d ",n/mask);
+// 		n%=mask;
+// 		mask/=10;
+// //		printf("p=%d n=%d\n",p,n);
+// 	}
+// 	return 0;
+// }
+
+#include <stdio.h>
+int main()
+{
+    char a;
+    a=getchar();
+    
+    while(a<='9'&&a>='0')
+    {
+        printf("%c ",a);
+        a=getchar();
+    }
+    return 0;
+}
