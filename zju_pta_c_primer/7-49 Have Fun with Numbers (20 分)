@@ -1,0 +1,107 @@
+Notice that the number 123456789 is a 9-digit number consisting exactly the numbers from 1 to 9, with no duplication. Double it we will obtain 246913578, 
+which happens to be another 9-digit number consisting exactly the numbers from 1 to 9, only in a different permutation. Check to see the result if we double it again!
+
+Now you are suppose to check if there are more numbers with this property. That is, double a given number with k digits, you are to tell if the resulting number consists of 
+only a permutation of the digits in the original number.
+
+Input Specification:
+Each input contains one test case. Each case contains one positive integer with no more than 20 digits.
+
+Output Specification:
+For each test case, first print in a line "Yes" if doubling the input number gives a number that consists of only a permutation of the digits in the original number, or "No" if not. Then in the next line, print the doubled number.
+
+Sample Input:
+1234567899
+Sample Output:
+Yes
+2469135798
+
+Code(gcc):
+/*
+输入一个数，将其乘二，如果结果是输入数字的各位数字的重组，则输出"Yes"否则输出"No"之后在下一行输出乘二的结果
+输入的是不超过20位的正整数 
+*/
+#include <stdio.h>
+int main()
+{		
+    int i, flag[20]={0},flag2,j,t,jin,s;     
+    /*flag[20]用来标记该位是否有数字(0)，是否被找到(1) 	t用来标记输入的最小一位 	flag2表示该位是否找到   也可以使用一个flag[10]，标记0~9各出现了几次，使用后再减走*/ 
+    char in[20],o[21];									//20位太大了只能用字符数组 
+    jin=0;												//jin是进位标记位 
+	s=1;												//s即start,打印数的时候从o[0]位还是从o[1]位开始 
+    i=0;												//工具人 
+    scanf("%c",&in[i]);
+	while(in[i]<='9'&&in[i]>='0')
+	{
+		i++;
+		scanf("%c",&in[i]);
+	}
+	in[i]='\0';
+	t=--i;												//此时i=t=最后一位所在的位置
+//	printf("t=%d",t);									//看下t的情况 应该是正确的 
+//	for(i=0;i<=t;)
+//	{
+//		printf("in[i]=%c i=%d\n",in[i],i);				//打印出每一位 
+//		i++;
+//	}
+	while(i>=0)											//开始一位一位乘以2 并进位 
+	{
+		int temp;
+		temp=in[i]-'0';
+//		printf("temp=%d ",temp);
+		if(temp<=4)
+		{
+			o[i+1]=2*temp+'0'+jin;
+			jin=0;									//进位标记位 
+			s=1;									//好像是判断比赋值占资源 
+		}
+		else										//第一位大于4就是说直接进位，那就直接输出"No" 
+		{
+			o[i+1]=2*temp%10+'0'+jin;
+			jin=1;
+			s=0;
+		}
+		i--;
+	}
+	if(jin)						//如果最后需要进一位 
+	{
+		o[0]=1;					//最高位置1 
+	}
+	for(i=0;i<=t;i++)			//t这时候在in[]最后一个数字上
+	{
+		flag2=0;				//找每一位的时候都要置0，找到再置1
+		if(jin)					//最高位需要进位 
+		{
+			o[0]='1';
+//			printf("a");
+			break;
+		}
+		for(j=1;j<=t+1;j++)
+		{
+			if(o[j]==in[i]&&flag[i]==0)
+			{
+				flag2=1;					//找到就置1 
+				flag[i]=1;					//找过的一个in[]就标记
+				break;
+			}
+//			printf("o[%d]=%c in[%d]=%c\n",j,o[j],i,in[i]);
+		}
+		if(flag2==0)				//没找到 
+		{
+			break;
+		}
+	}
+	if(flag2==0)			//异常结束 即在允许找寻的位没找到或者最高位大于4 
+	{
+		printf("No\n");
+	}
+	else if(flag2==1)
+	{
+		printf("Yes\n");
+	}
+	for(i=s;i<=t+1;i++)				//从s位开始（如果最高位进位就是0否则是1） 
+	{
+		printf("%c",o[i]);			//正常打印两倍 
+	}
+    return 0;
+}
