@@ -1,0 +1,109 @@
+本题要求编写程序，计算序列部分和 1 - 1/4 + 1/7 - 1/10 + ... 直到最后一项的绝对值不大于给定精度eps。
+
+输入格式:
+输入在一行中给出一个正实数eps。
+
+输出格式:
+在一行中按照“sum = S”的格式输出部分和的值S，精确到小数点后六位。题目保证计算结果不超过双精度范围。
+
+输入样例1:
+4E-2
+输出样例1:
+sum = 0.854457
+输入样例2:
+0.02
+输出样例2:
+sum = 0.826310
+
+Code(gcc):
+
+/*好像要string才行       不是的，可以直接%lf*/
+/*输入是一行内的正实数，且计算结果不超过双精度范围*/
+/*思路：不管怎么说，一定是  整数+小数点+整数+E（或者e）+负数*/
+// #include <stdio.h>                       //这样也行，但是...
+// #include <string.h>
+// #include <math.h>               //说起来pow在这里，但是这个平台好像不带也行
+// int main(void)
+// {
+//     char str[1001];
+//     double eps, sum, ge, xs, zs, xws, po,t;                //ge：在小数点前面的  xs：小数点后的部分  zs：指数  xws：小数点后哪一位
+//     int i, flag, dq, len;                                //flag：需要标记是在小数点前：flag=1  小数点后:flag=0   e后：flag=-1
+//     i=0;
+//     flag=1;                         //默认在小数点前，在e或E前
+//     ge=0;                           //个位数
+//     xs=0;                           //小数
+//     zs=0;                           //指数
+//     xws=1;                          //此时在小数点后第几位
+//     sum=1;                          //因为是判断小于eps后直接加上小数的，所以直接置1
+//     t=1;                            //用t判断的（上面那句），因此置1
+//     gets(str);                      //不建议使用的函数gets
+//     len=strlen(str);
+//     while(i<len)       //(str[i]!='/0')     //不知道这个判断非'/0'为什么不行
+//     {
+//         if(str[i]=='.')             //发现小数点
+//         {
+//             flag=0;
+//             i++;
+//             continue;               //跳到下一波循环
+//         }
+//         else if(str[i]=='e'||str[i]=='E')
+//         {
+//             flag=-1;
+//             i+=2;                           //正常应该是小数，所以直接把负号跳过去（除非硬拿错误数据搞）
+//             continue;
+//         }
+//         else
+//         {
+//             dq=str[i]-'0';                  //dq现在是int整数，字面值    前面跳过循环就是为了这个
+//         }
+//         if(flag==1)
+//         {
+//             ge=ge*10+dq;                    //小数点前的整数
+//         }
+//         else if(flag==0)
+//         {
+//             xws/=10;                        //每此小数都往后推一位
+//             xs+=xws*dq;                     //小数
+//         }
+//         else if(flag==-1)                   //此时是指数
+//         {
+//             zs=zs*10+dq;                    //指数和小数点前面的整数的算法是一样的
+//         }
+//         i++;
+//     }
+//      po=pow(10,-1*zs);                      //临时加的参数
+// //     printf("ge=%lf xs=%lf zs=%lf po=%lf\n",ge,xs,zs,po);
+//     eps=(ge+xs)*po;                 //到此暂时没问题
+    
+//     //printf("%lf",eps);            //此时输入4E-2 eps为0.040000           输入为0.02 eps为0.020000
+//     i=1;
+//     while(t>eps)
+//     {
+//         t=1.0/(3*i+1);
+//         sum+=t*pow((-1),i);                 //输出闪亮登场
+// //        printf("sum=%lf t=%lf i=%d\n",sum,t,i);
+//         i++;
+//     }
+//     printf("sum = %.6lf",sum);                  //样例2输入输出正常   样例1输入输出正常
+//     return 0;
+// }
+#include<stdio.h>
+int main(){
+    double eps;
+    scanf("%lf",&eps);
+    int i=1;
+    double sign=1.0;
+    double sum=0;
+//     printf("%f",eps);
+    do{
+        sum=sum+sign/i;
+        i+=3;
+        sign=-sign;
+    }while(1.0/i>=eps);
+    
+    if(1.0/(i-3)!=eps&&eps<1){
+        sum=sum+sign/i;
+    }
+    printf("sum = %.6f",sum);
+    return 0;
+}
