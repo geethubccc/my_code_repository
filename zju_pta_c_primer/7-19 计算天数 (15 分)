@@ -1,0 +1,65 @@
+本题要求编写程序计算某年某月某日是该年中的第几天。
+
+输入格式:
+输入在一行中按照格式“yyyy/mm/dd”（即“年/月/日”）给出日期。注意：闰年的判别条件是该年年份能被4整除但不能被100整除、或者能被400整除。闰年的2月有29天。
+
+输出格式:
+在一行输出日期是该年中的第几天。
+
+输入样例1:
+2009/03/02
+输出样例1:
+61
+输入样例2:
+2000/03/02
+输出样例2:
+62
+
+Code(gcc):
+#include <stdio.h>
+int main()
+{
+    int year,mth,day,isleap,num;
+    isleap=0;
+    scanf("%d/%d/%d",&year,&mth,&day);
+    if(year%4==0&&year%100!=0||year%400==0)
+    {
+        isleap=1;
+    }
+    if(isleap==0)
+    {switch(mth)
+        {
+            case 1:num=day;break;
+            case 2:num=day+31;break;
+            case 3:num=day+31+28;break;
+            case 4:num=day+31+28+31;break;
+            case 5:num=day+31+28+31+30;break;
+            case 6:num=day+31+28+31+30+31;break;
+            case 7:num=day+31+28+31+30+31+30;break;
+            case 8:num=day+31+28+31+30+31+30+31;break;
+            case 9:num=day+31+28+31+30+31+30+31+31;break;
+            case 10:num=day+31+28+31+30+31+30+31+31+30;break;
+            case 11:num=day+31+28+31+30+31+30+31+31+30+31;break;
+            case 12:num=day+31+28+31+30+31+30+31+31+30+31+30;break;
+        }
+    }
+    else
+    {switch(mth)
+        {
+            case 1:num=day;break;
+            case 2:num=day+31;break;
+            case 3:num=day+31+29;break;
+            case 4:num=day+31+29+31;break;
+            case 5:num=day+31+29+31+30;break;
+            case 6:num=day+31+29+31+30+31;break;
+            case 7:num=day+31+29+31+30+31+30;break;
+            case 8:num=day+31+29+31+30+31+30+31;break;
+            case 9:num=day+31+29+31+30+31+30+31+31;break;
+            case 10:num=day+31+29+31+30+31+30+31+31+30;break;
+            case 11:num=day+31+29+31+30+31+30+31+31+30+31;break;
+            case 12:num=day+31+29+31+30+31+30+31+31+30+31+30;break;
+        }
+    }
+    printf("%d",num);
+    return 0;
+}
