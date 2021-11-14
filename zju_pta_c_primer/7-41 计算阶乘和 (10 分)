@@ -1,0 +1,41 @@
+对于给定的正整数N，需要你计算 S=1!+2!+3!+...+N!。
+
+输入格式：
+输入在一行中给出一个不超过10的正整数N。
+
+输出格式：
+在一行中输出S的值。
+
+输入样例：
+3
+输出样例：
+9
+
+Code(gcc):
+
+#include <stdio.h>
+int jc(int N);
+int main(void)
+{
+    int i,N,sum;
+    sum=0;
+    i=1;
+    scanf("%d",&N);
+    for(;i<=N;i++)
+    {
+        sum+=jc(i);
+    }
+    printf("%d",sum);
+    return 0;
+}
+int jc(int N)
+{
+    int prod,i;
+    prod=1;
+    for(i=1;i<=N;i++)
+    {
+        prod*=i;
+//        printf("i=%d N=%d\n",i,N);
+    }
+    return prod;
+}
