@@ -1,0 +1,30 @@
+世界上不同国家有不同的写日期的习惯。比如美国人习惯写成“月-日-年”，而中国人习惯写成“年-月-日”。下面请你写个程序，自动把读入的美国格式的日期改写成中国习惯的日期。
+
+输入格式：
+输入在一行中按照“mm-dd-yyyy”的格式给出月、日、年。题目保证给出的日期是1900年元旦至今合法的日期。
+
+输出格式：
+在一行中按照“yyyy-mm-dd”的格式给出年、月、日。
+
+输入样例：
+03-15-2017
+输出样例：
+2017-03-15
+
+Code(gcc):
+// #include <stdio.h>
+// int main()
+// {                                            //要把我整死，不过这个方法好像内存占用小一点  180K左右
+//     char rq[11];
+//     gets(rq);
+//     printf("%c%c%c%c%c%c%c%c%c%c",rq[6],rq[7],rq[8],rq[9],rq[5],rq[0],rq[1],rq[2],rq[3],rq[4]);
+//     return 0;
+// }
+#include <stdio.h>
+int main()
+{
+    int month,day,year;             //320K 192K也差不多
+    scanf("%d-%d-%d",&month,&day,&year);
+    printf("%d-%02d-%02d",year,month,day);
+    return 0;
+}
