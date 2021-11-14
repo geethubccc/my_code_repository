@@ -1,0 +1,49 @@
+本题要求统计给定整数M和N区间内素数的个数并对它们求和。
+
+输入格式:
+输入在一行中给出两个正整数M和N（1≤M≤N≤500）。
+
+输出格式:
+在一行中顺序输出M和N区间内素数的个数以及它们的和，数字间以空格分隔。
+
+输入样例:
+10 31
+输出样例:
+7 143
+
+Code(gcc):
+
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    int m,n,i,num,sum;
+    scanf("%d %d",&m,&n);
+    num=0;
+    sum=0;
+    i=m;
+    for(;i<=n;i++)
+    {
+    	if(i<=1)
+    	{
+    		continue;
+		}
+        int j,isleap;
+        isleap=1;
+        for(j=2;j<=sqrt(i);j++)     //此时i=2或者i=3的情况不能被涵盖
+        {
+            if(i%j==0)
+            {
+                isleap=0;           //非质数
+                break;
+            }
+        }
+        if(isleap==1||i==2||i==3)
+        {
+            num++;
+            sum+=i;
+        }
+    }
+    printf("%d %d",num,sum);
+    return 0;
+}
