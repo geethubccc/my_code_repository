@@ -1,0 +1,108 @@
+水仙花数是指一个N位正整数（N≥3），它的每个位上的数字的N次幂之和等于它本身。例如：153=1^3+5^3+3^3。 本题要求编写程序,计算所有N位水仙花数。
+
+输入格式:
+输入在一行中给出一个正整数N（3≤N≤7）。
+输出格式:
+按递增顺序输出所有N位水仙花数，每个数字占一行。
+
+输入样例:
+3
+输出样例:
+153
+370
+371
+407
+
+Code(gcc):
+
+#include <stdio.h>
+#include <math.h>
+int main(void)
+{
+    int n,xx,sx,i,flag;
+    xx=1;
+    flag=0;
+    scanf("%d",&n);
+    for(i=1;i<n;i++)
+    {
+        xx*=10;
+    }
+    sx=10*xx;
+    for(i=xx;i<sx;i++)
+    {
+        int sum,t;
+        sum=0;
+        t=i;
+        while(t)
+        {
+            int temp,m;
+            temp=1;
+            m=n;
+            while(m--)
+            {
+                temp*=(t%10);
+            }
+            sum+=temp;
+            t=t/10;
+        }
+        if(sum==i)
+        {
+            if(flag)
+            {
+                printf("\n");
+            }
+            printf("%d",i);
+            flag=1;
+        }
+    }
+    return 0;
+}
+//#include <stdio.h>                    //写个函数就超时我不是很认可（嚼屎）
+//#include <math.h>
+//int sss(int t,int n)
+//{
+//    int flag;
+//    long temp,i,r,sum;
+//    sum=0;
+//    flag=0;
+//    temp=t;
+//    for(i=0;i<n;i++)
+//    {
+//        r=temp%10;
+//        temp=temp/10;
+//        sum+=pow(r,n);
+//     }
+//    if(sum==t)
+//    {
+//        flag=1;
+//    }
+////     printf("sum=%d",sum);
+//    return flag;
+//}
+//int main(void)
+//{
+//    long sx,xx,n,i,j,k,t,r,sum;      //xx下限  sx上限
+//    k=0;
+//    xx=1;
+//    sx=9;                       
+//    scanf("%ld",&n);
+//    for(i=1;i<n;i++)                //找到n位数的上限和下限
+//    {
+//        xx*=10;
+//        sx=sx*10+9;
+//    }
+////     printf("xx=%d sx=%d\n",xx,sx);
+//    for(i=xx;i<=sx;i++)
+//    {
+//        if(sss(i,n))                //如果n位数i是水仙数
+//        {
+//            if(k)
+//            {
+//                printf("\n");
+//            }
+//            printf("%ld",i);
+//            k=1;                    //下一个n不是水仙数
+//        }
+//    }
+//    return 0;
+//}
