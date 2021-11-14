@@ -1,0 +1,36 @@
+英文辅音字母是除A、E、I、O、U以外的字母。本题要求编写程序，统计给定字符串中大写辅音字母的个数。
+
+输入格式：
+输入在一行中给出一个不超过80个字符、并以回车结束的字符串。
+
+输出格式：
+输出在一行中给出字符串中大写辅音字母的个数。
+
+输入样例
+HELLO World!
+输出样例：
+4
+
+Code(gcc):
+
+#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+    char in[81];
+    int len, num, i;
+    num=0;
+    i=0;
+    gets(in);
+    len=strlen(in);
+    while(i<len)
+    {
+        if(in[i]<='Z'&&in[i]>'A'&&in[i]!='E'&&in[i]!='I'&&in[i]!='O'&&in[i]!='U')
+        {
+            num++;
+        }
+        i++;
+    }
+    printf("%d",num);
+    return 0;
+}
