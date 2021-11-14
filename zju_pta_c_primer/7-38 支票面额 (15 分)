@@ -1,0 +1,96 @@
+一个采购员去银行兑换一张y元f分的支票，结果出纳员错给了f元y分。采购员用去了n分之后才发觉有错，于是清点了余额尚有2y元2f分，问该支票面额是多少？
+
+输入格式：
+输入在一行中给出小于100的正整数n。
+
+输出格式：
+在一行中按格式y.f输出该支票的原始面额。如果无解，则输出No Solution。
+
+输入样例1：
+23
+输出样例1：
+25.51
+输入样例2：
+22
+输出样例2：
+No Solution
+
+Code(gcc):
+
+// /*本来要y*100+f分，拿到了f*100+y分，花了n分，剩下2*y*100+2*f */
+// /* 输出y.f */
+// /*f应该是小于100的，同时n一定小于100 */
+// /*
+// 化简得以下关系：
+// f>y; f<100;n<100;
+// 98*f-199*y=n;
+// */
+#include <stdio.h>
+int main()
+{
+    int n,y,f,flag;     //,n1;
+    y=0;
+//    f=0;
+    flag=0;
+    scanf("%d",&n);
+    for(;y<=49;y++)
+    {
+        for(f=0;f<100&&flag!=1;f++)
+        {
+//             n1=98*f-199*y;
+//             printf(" n1=%d",);
+            if(n==98*f-199*y)
+            {
+                printf("%d.%d",y,f);            //这里之前是printf("%d.02%d",y,f)    多考虑了一点，应该说没考虑清楚
+                flag=1;
+                break;
+            }
+        }
+    }
+    if(flag==0)
+    {
+        printf("No Solution");
+    }
+    return 0;
+}
+
+
+// #include <stdio.h>
+// int main()
+// {
+//     int n, f, y, x, z, p;
+//     scanf("%d", &n);
+//     for (f = 0; f < 100; f++)
+//     {
+//         for (y = 0; y < 100; y++)
+//         {
+//             z = 2 * y * 100 + 2 * f + n;
+//             p = f * 100 + y;
+//             if (p == z)
+//             {
+//                 printf("%d.%d", y, f);
+//                 return 0;
+//             }
+//         }
+//     }
+//     printf("No Solution");
+//     return 0;
+// }
+
+// #include<stdio.h>
+// int main (){
+//    int n=0,y=0,f=0,flag=0;
+//    scanf("%d",&n);
+//     for(f=0;f<100&&flag!=1;f++){
+//       for(y=0;y<49;y++){
+//         if(98*f-199*y==n){
+//             printf("%d.%d",y,f);
+//             flag=1;
+//             break;
+//            }
+//        }
+//    }
+//    if(flag==0)
+//     printf("No Solution"); 
+//    return 0;
+// }
