@@ -1,0 +1,37 @@
+编程求出大于m的最小素数。
+
+输入格式:
+直接输入一个正整数
+输出格式:
+直接输出结果，没有任何附加格式控制。
+
+输入样例:
+12
+输出样例:
+13
+
+Code(gcc):
+
+#include <stdio.h>
+int main(void)
+{
+    int i,n,j,flag;
+    flag=0;
+    scanf("%d",&n);
+    i=n;
+    while(flag==0)
+    {
+        flag=1;
+        i++;
+        for(j=2;j<sqrt(i);j++)
+        {
+            if(i%j==0)
+            {
+                flag=0;
+                break;
+            }
+        }
+    }
+    printf("%d",i);
+    return 0;
+}
