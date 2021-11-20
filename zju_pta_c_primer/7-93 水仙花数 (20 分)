@@ -57,7 +57,7 @@ int main(void)
     }
     return 0;
 }
-//#include <stdio.h>                    //写个函数就超时我不是很认可（嚼屎）
+//#include <stdio.h>                    //写个函数就超时我不是很认可（嚼屎） 原来是pow()函数，pat的编译器没法编译太大的数，所以七次方就不行了，只能一位一位成
 //#include <math.h>
 //int sss(int t,int n)
 //{
